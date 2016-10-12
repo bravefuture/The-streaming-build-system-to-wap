@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <meta name="keywords" content="" />
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link type="text/css" rel="stylesheet" href="../css/style.css" />
+    <script>
+        !function(n,e){var t=e.documentElement,i="orientationchange"in n?"orientationchange":"resize",d=function(){var n=t.clientWidth;
+                n&&(t.style.fontSize=100*(n/750)+"px")}
+                e.addEventListener&&(n.addEventListener(i,d,!1),e.addEventListener("DOMContentLoaded",d,!1),d())}(window,document)
+    </script>
+</head>
+<body>
+    
+	<i class="icon-dialogue"></i>
+    <i class="icon-video"></i>
+
+    <i class="icon-pen"></i>
+    <i class="icon-down"></i>
+
+	<script src="../js/seajs/sea.js"></script>
+    <script type="text/javascript">
+        var config = seajs.config({
+            base: '../js',
+            alias: {
+				jquery: '../js/jquery/jquery.js'
+			},
+            map: [
+                [/^(.*\.(?:js))(.*)$/i, '$1?ver=20160921104708']
+            ]
+        });
+    </script>
+	<script>
+		seajs.use(['index/dist/index', 'sub/dist/sub', 'jquery'], function(index, sub) {
+			console.log('index: ' + index(3));
+			console.log('sub: ' + sub(3));
+		});
+	</script>
+</body>
+</html>

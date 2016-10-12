@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+/**
+ * [wapSprite 雪碧图]
+ * @param  {[type]} $bgW [合成图宽度]
+ * @param  {[type]} $bgH [合成图高度]
+ * @param  {[type]} $w   [单个图宽度]
+ * @param  {[type]} $h   [单个图高度]
+ * @param  {[type]} $x   [单个图x轴位移]
+ * @param  {[type]} $y   [单个图y轴位移]
+ */
+@function spritePosX($bgW, $x, $w){
+    @if ($bgW / 1px - $w / 1px == 0) {
+        @return 0;
+    } @else {
+        @return $x / ($bgW - $w) * 100%;
+    }   
+}
+@function spritePosY($bgH, $y, $h){
+    @if ($bgH / 1px - $h / 1px == 0) {
+        @return 0;
+    } @else {
+        @return $y / ($bgH - $h) * 100%;
+    }   
+}
+@function spriteSize($bgW, $w){
+    @return $bgW / $w * 100%;
+}
+
+@mixin wapSprite($bgW, $bgH, $w, $h, $x, $y){  
+    background-position: spritePosX($bgW, $x, $w) spritePosY($bgH, $y, $h); background-size: spriteSize($bgW, $w); width: px2rem($w); height: px2rem($h);
+}

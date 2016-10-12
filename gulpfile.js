@@ -1,28 +1,19 @@
-# gulp前端集成解决方案（wap端） 
-> 利用gulp完成对Sass文件的编译压缩、自动生成雪碧图、seajs的合并压缩及对以上任务进行实时监控。
+/**
+ * 1. 先全局安装所需npm插件
+ * 2. 在package.json文件里修改"scripts"值，link所有npm插件
+ * 3. 连接npm插件: $ npm start (首次编译时连接)
+ * 4. 启动gulp: $ gulp
+ */
 
-##### 所需工具
-1. gulp
-2. gulp.spritesmith
-3. gulp-sass
-4. gulp-seajs-combine
-5. gulp-livereload
+'use strict';
 
-##### 在根目录下新建Gulpfile.js
-
-##### 把所需的插件request进来
-```javascript
 var gulp = require('gulp');
 var spritesmith = require('gulp.spritesmith');
 var sass = require('gulp-sass');
 var seajs = require('gulp-seajs-combine');
 var uglify = require('gulp-uglify');
 var livereload = require('gulp-livereload');
-```
-##### 合成雪碧图
-> 这里可同时合并多个雪碧图，可在spriteFileNames数组添加新文件名，同时在指定的文件目录新建该文件。
 
-```javascript
 /**
  * 需要合成图文件名
  */
@@ -44,11 +35,7 @@ spriteFileNames.forEach(function(v, i) {
         return spriteData.pipe(gulp.dest('images/' + v + '_sprite/')).pipe(livereload());
     });
 });
-```
-##### seajs模块合并压缩
-> 同样可实现多个入口文件的合并压缩。
 
-```javascript
 /**
  * 需要模块合并的文件名
  */
@@ -71,12 +58,11 @@ seajsFileNames.forEach(function(v, i) {
 	            mangle: {except: ['require', 'exports', 'module', '$']},
 	            compress: true
 	        }))
-	        .pipe(gulp.dest('./js/'+ v +'/dist/'));
+	        .pipe(gulp.dest('./js/'+ v +'/dist/'))
+	        .pipe(livereload());
 	});	
 });
-```
-##### 监控html文件
-```javascript
+
 /**
  * 监控html文件
  */
@@ -84,10 +70,7 @@ gulp.task('html', function() {
     gulp.src('./html_demo/*.html')
         .pipe(livereload());
 });
-```
 
-##### 编译sass
-```javascript
 /**
  * 编译sass
  */
@@ -97,9 +80,7 @@ gulp.task('sass', spriteTaskNames, function() {
         .pipe(gulp.dest('./css'))
         .pipe(livereload());
 });
-```
-##### 实时监控
-```javascript
+
 /**
  * 实时监控
  */
@@ -110,13 +91,9 @@ gulp.task('watch', function() {
     gulp.watch('html_demo/*.html', ['html']);
     gulp.watch('js/**/**/*.js', seajsTastNames);
 });
-```
-##### 指定默认任务
-```javascript
+
+/**
+ * 指定默认任务
+ */
 gulp.task('default', ['watch', 'sass'].concat(spriteTaskNames).concat(seajsTastNames));
-```
-##### 启动流程
-1. 先全局安装所需npm插件
-2. 在package.json文件里修改"scripts"值，link所有npm插件
-3. 连接npm插件: $ npm start (首次编译时连接)
-4. 启动gulp: $ gulp
+
