@@ -1,4 +1,11 @@
 /**
+ * [gulp前端集成解决方案]
+ * @update: 2016.10.12
+ * @author: yongcheng0660@163.com
+ * @github: https://github.com/bravefuture
+ */
+
+/**
  * 1. 先全局安装所需npm插件
  * 2. 在package.json文件里修改"scripts"值，link所有npm插件
  * 3. 连接npm插件: $ npm start (首次编译时连接)
